@@ -3,17 +3,27 @@ export class Renderer {
         this.canvas = canv;
         this.ctx = ctx;
     }
-
-    drawCircle(circle, strokeColor, fillColor){
-        this.ctx.beginPath();
-        this.ctx.arc(circle.position.x, circle.position.y, circle.radius, 0, Math.PI*2, true);
+    drawRect(rect, strokeColor, fillColor) {
+        this.ctx.save();
+        this.ctx.translate(rect.position.x, rect.position.y);
         if (fillColor) {
             this.ctx.fillStyle = fillColor;
-            this.ctx.fill();    //ctx colors the background of the circle
+            this.ctx.fillRect(
+                - rect.width/2,
+                - rect.height/2,
+                rect.width,
+                rect.height,
+            );
         }
         this.ctx.strokeStyle = strokeColor;
         this.ctx.lineWidth = 3;
-        this.ctx.stroke();  //ctx draws the border of the circle
+        this.ctx.strokeRect(
+            - rect.width/2,
+            - rect.height/2,
+            rect.width,
+            rect.height,
+        );
+        this.ctx.restore();
     }
 
     clearFrame() {

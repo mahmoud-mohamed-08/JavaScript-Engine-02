@@ -13,7 +13,7 @@ function updateAndDraw() {
     renderer.clearFrame();  //first clear
     
     
-    renderer.drawRect({position: {x: 70, y: 90}, width: 50, height: 70}, "purple", "cyan");
+    renderer.drawRect({position: {x: 70, y: 90}, width: 50, height: 70}, "red", "black");
 
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);

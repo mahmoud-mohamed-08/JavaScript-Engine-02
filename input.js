@@ -12,6 +12,13 @@ export class Input {
             lclick: false,
             rclick: false
         };
+        
+        //function binding: https://www.geeksforgeeks.org/javascript-function-binding/
+        this.mouseDown = this.mouseDown.bind(this); //fix the meaning of the key word "this" so that it always refers to the Inputs
+        this.mouseUp = this.mouseUp.bind(this); //without biding we get error "Undefined"
+        this.onContextMenu = this.onContextMenu.bind(this);
+        this.mouseMove = this.mouseMove.bind(this);
+        this.resizeCanvas = this.resizeCanvas.bind(this);
     }
 
     addListeners() {

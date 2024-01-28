@@ -39,6 +39,12 @@ export class Renderer {
         this.ctx.restore();
     }
 
+    drawFrame(objects, fillCol, bordCol) {
+        for (let i = 0; i<objects.length; i++) {    //for loop
+            this.drawCircle(objects[i], bordCol, fillCol);
+        } 
+    }
+
     clearFrame() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);    
         //erase all drawings in a rectangle with the size of the canvas 

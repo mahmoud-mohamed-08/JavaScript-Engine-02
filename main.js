@@ -5,7 +5,7 @@ const canv = document.getElementById("canvas"); //find canvas element on web pag
 const ctx = canv.getContext("2d");  //used for drawing shapes on canvas
 
 const renderer = new Renderer(canv, ctx);   //object from imported class Renderer
-
+const objects = [];
 //MAIN LOOP
 function updateAndDraw() {
     //make objects
@@ -13,6 +13,6 @@ function updateAndDraw() {
     //draw objects
     renderer.clearFrame();  //first clear
     renderer.drawCircle(circle, "black");
-    
+    renderer.drawRect({position: {x: 50, y: 60}, width: 50, height: 20});
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);

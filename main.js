@@ -26,7 +26,7 @@ let shapeBeingMade = null;
 function updateAndDraw() {
     //make objects
     if (inp.inputs.lclick && shapeBeingMade == null) {  //make rectangle
-        shapeBeingMade = new Rectangle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0);
+        shapeBeingMade = new Rectangle(inp.inputs.mouse.position.clone(), 20, 20);
     }
     if (inp.inputs.lclick && shapeBeingMade) {  //resize circle
         const selectedRadius = shapeBeingMade.position.clone().subtract(inp.inputs.mouse.position).magnitude();

@@ -59,8 +59,11 @@ function updateAndDraw() {
     renderer.clearFrame();  //first clear
     renderer.drawFrame(objects, fillCol, bordCol);
     //draw shape
-    if (shapeBeingMade) {
+    if (shapeBeingMade instanceof Circle) {
         renderer.drawCircle(shapeBeingMade, bordCol, null);
+        //lesson 03 - draw rectangle shape
+    } else if (shapeBeingMade instanceof Rect) {
+        renderer.drawRect(shapeBeingMade, bordCol, null);
     }
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);

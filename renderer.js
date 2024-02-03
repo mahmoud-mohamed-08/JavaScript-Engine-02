@@ -1,3 +1,6 @@
+import {Circle} from './circle.js';
+import {Rect} from './rect.js';
+
 export class Renderer {
     constructor (canv, ctx) {
         this.canvas = canv;
@@ -41,7 +44,13 @@ export class Renderer {
 
     drawFrame(objects, fillCol, bordCol) {
         for (let i = 0; i<objects.length; i++) {    //for loop
-            this.drawCircle(objects[i], bordCol, fillCol);
+            const shape = objects[i];
+            if (shape instanceof Circle) {
+                this.drawCircle(shape, bordCol, fillCol);
+            } 
+            else if (shape instanceof Rect) {
+                this.drawRect(shape, bordCol, fillCol);
+            }
         } 
     }
 

@@ -3,4 +3,11 @@ export class Circle {
         this.position = pos;
         this.radius = r;
     }
+
+}
+
+export class Rectangle {
+    constructor(pos, width, height) {
+        this.position = pos;
+    }
 }

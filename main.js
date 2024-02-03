@@ -24,6 +24,15 @@ const objects = [];
 let shapeBeingMade = null;
 //button variables
 let shapeSelected = 'r';
+const circleButton = document.getElementById("c");
+const rectButton = document.getElementById("r");
+circleButton.onclick = function() {
+    shapeSelected = 'c';
+};
+rectButton.onclick = function() {
+    shapeSelected = 'r';
+};
+
 
 //MAIN LOOP
 function updateAndDraw() {

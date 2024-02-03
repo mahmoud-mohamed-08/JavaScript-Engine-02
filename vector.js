@@ -35,6 +35,12 @@ export class Vec {
         return this;
     }
 
+    absolute() {
+		this.x = Math.abs(this.x);
+		this.y = Math.abs(this.y);
+		return this;
+	}
+
     //non-chainable methods
     clone() {   //create a new vector with the same coordinates
         return new Vec(this.x, this.y);
@@ -43,4 +49,8 @@ export class Vec {
     magnitude() {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
+
+    distanceTo (v) {
+		return this.clone().subtract(v).magnitude();
+	}
 }

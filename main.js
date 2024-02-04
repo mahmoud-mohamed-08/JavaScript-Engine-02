@@ -1,5 +1,6 @@
 import {Renderer} from './renderer.js';
 import {Circle} from './circle.js';
+import {Rect} from './rect.js';
 import {Vec} from './vector.js';
 import {Input} from './input.js';
 
@@ -21,16 +22,40 @@ const bordCol = "black";
 
 const objects = [];
 let shapeBeingMade = null;
+//button variables
+let shapeSelected = 'r';
+const circleButton = document.getElementById("c");
+const rectButton = document.getElementById("r");
+circleButton.onclick = function() {
+    shapeSelected = 'c';
+};
+rectButton.onclick = function() {
+    shapeSelected = 'r';
+};
+
 
 //MAIN LOOP
 function updateAndDraw() {
     //make objects
-    if (inp.inputs.lclick && shapeBeingMade == null) {  //make circle
-        shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0);
+    if (inp.inputs.lclick && shapeBeingMade == null) {
+        //lesson 03 - make rectangles with mouse
+        if (shapeSelected == 'c') {
+            shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0);
+        } else if (shapeSelected == 'r') {
+            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2);
+        }
+        
     }
-    if (inp.inputs.lclick && shapeBeingMade) {  //resize circle
+    //adjust radius
+    if (inp.inputs.lclick && shapeBeingMade instanceof Circle) {
         const selectedRadius = shapeBeingMade.position.clone().subtract(inp.inputs.mouse.position).magnitude();
         shapeBeingMade.radius = selectedRadius < SMALLEST_RADIUS ? shapeBeingMade.radius : selectedRadius;
+    } 
+    //lesson 03 - adjust rectangle
+    else if (inp.inputs.lclick && shapeBeingMade instanceof Rect) {
+        const selectionVector = shapeBeingMade.position.clone().subtract(inp.inputs.mouse.position).absolute();
+        shapeBeingMade.width = selectionVector.x > SMALLEST_RADIUS ? selectionVector.x * 2 : SMALLEST_RADIUS * 2;
+        shapeBeingMade.height = selectionVector.y > SMALLEST_RADIUS ? selectionVector.y * 2 : SMALLEST_RADIUS * 2;
     }
 
     //add objects
@@ -43,8 +68,11 @@ function updateAndDraw() {
     renderer.clearFrame();  //first clear
     renderer.drawFrame(objects, fillCol, bordCol);
     //draw shape
-    if (shapeBeingMade) {
+    if (shapeBeingMade instanceof Circle) {
         renderer.drawCircle(shapeBeingMade, bordCol, null);
+        //lesson 03 - draw rectangle shape
+    } else if (shapeBeingMade instanceof Rect) {
+        renderer.drawRect(shapeBeingMade, bordCol, null);
     }
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);

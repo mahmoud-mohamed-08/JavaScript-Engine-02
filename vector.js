@@ -36,7 +36,7 @@ export class Vec {
     }
 
     absolute() {
-		this.x = Math.abs(this.x);
+		this.x = Math.abs(this.x);  //makes absolute or positive values
 		this.y = Math.abs(this.y);
 		return this;
 	}

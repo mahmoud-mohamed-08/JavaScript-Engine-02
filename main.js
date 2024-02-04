@@ -82,6 +82,7 @@ function updateAndDraw() {
         }
     }
     if(closestObji != null) {
+        movingShape = true;
         objects[closestObji].isMoved = true;
     }
     if (movingShape && !inp.inputs.rclick) {
@@ -90,7 +91,6 @@ function updateAndDraw() {
             objects[i].isMoved = false; //when not rclick anymore set isMoved to false
         } 
     }
-
     //update the positions and velocities for all moved objects
     for (let i = 0; i<objects.length; i++) {
         if(objects[i].isMoved) {

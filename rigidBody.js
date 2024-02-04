@@ -4,6 +4,7 @@ export class RigidBody {    //any object with fixed shape and physics
     constructor(s) {
         this.shape = s;
         this.velocity = new Vec(0, 0);
+        this.isMoved = false;
     }
 
     updateShape(dt) {

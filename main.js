@@ -6,7 +6,7 @@ import {Input} from './input.js';
 
 //simulation constants
 const SMALLEST_RADIUS = 10;
-
+const dt = 1/60;    //based on seconds per frame
 
 const canv = document.getElementById("canvas"); //find canvas element on web page
 const ctx = canv.getContext("2d");  //used for drawing shapes on canvas

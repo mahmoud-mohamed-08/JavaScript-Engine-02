@@ -44,12 +44,12 @@ export class Renderer {
 
     drawFrame(objects, fillCol, bordCol) {
         for (let i = 0; i<objects.length; i++) {    //for loop
-            const shape = objects[i];
-            if (shape instanceof Circle) {
-                this.drawCircle(shape, bordCol, fillCol);
+            const rigidobj = objects[i];
+            if (rigidobj.shape instanceof Circle) {
+                this.drawCircle(rigidobj.shape, bordCol, fillCol);
             } 
-            else if (shape instanceof Rect) {
-                this.drawRect(shape, bordCol, fillCol);
+            else if (rigidobj.shape instanceof Rect) {
+                this.drawRect(rigidobj.shape, bordCol, fillCol);
             }
         } 
     }

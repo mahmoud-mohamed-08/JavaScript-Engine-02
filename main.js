@@ -82,10 +82,10 @@ function updateAndDraw() {
         }
     }
     if(closestObji != null) {
-        objects[i].isMoved = true;
+        objects[closestObji].isMoved = true;
     }
-    if (movingObject && !inp.inputs.rclick) {
-        movingObject = false;   //stop moving objects
+    if (movingShape && !inp.inputs.rclick) {
+        movingShape = false;   //stop moving objects
         for(let i=0; i<objects.length; i++) {
             objects[i].isMoved = false; //when not rclick anymore set isMoved to false
         } 
@@ -95,7 +95,7 @@ function updateAndDraw() {
     for (let i = 0; i<objects.length; i++) {
         if(objects[i].isMoved) {
             const movedObj = objects[i];
-            movedObj.shape.position.copy(inp.inputs.mouse.position);
+            movedObj.shape.position.copy(inp.inputs.mouse.position); //updates the position of the moved obj
         }
     }
 

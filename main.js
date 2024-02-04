@@ -3,6 +3,7 @@ import {Circle} from './circle.js';
 import {Rect} from './rect.js';
 import {Vec} from './vector.js';
 import {Input} from './input.js';
+import {RigidBody} from './rigidBody.js';
 
 //simulation constants
 const SMALLEST_RADIUS = 10;
@@ -62,7 +63,7 @@ function updateAndDraw() {
 
     //add objects
     if (shapeBeingMade && !inp.inputs.lclick) { //store ready circle after releasing left click
-        objects.push(shapeBeingMade);   //push means add object to array
+        addObject(shapeBeingMade);   //push means add object to array
         shapeBeingMade = null;
     }
 
@@ -110,3 +111,7 @@ function updateAndDraw() {
     }
 }
 let renderInterval = setInterval(updateAndDraw, 1000 / 60);
+
+function addObject(shape) {
+    objects.push(new RigidBody(shape));
+}

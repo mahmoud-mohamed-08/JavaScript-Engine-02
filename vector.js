@@ -39,6 +39,15 @@ export class Vec {
 		this.y = Math.abs(this.y);
 		return this;
 	}
+
+	normalize() {
+		const length = this.magnitude();
+		if(length > 0) {
+			this.x /= length;
+			this.y /= length;
+		}
+		return this;
+	}
 	
 	//non-chainable
 	clone () {	//create a new vector with xy of this

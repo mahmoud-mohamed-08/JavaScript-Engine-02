@@ -114,3 +114,6 @@ function addObject(shape) {
     const object = new RigidBody(shape);  
     objects.push(object);
 } 
+
+let n = 4%3;
+console.log(n);

@@ -25,10 +25,30 @@ export class Vec {
 		this.y += v.y;
 		return this;
 	}
+
+	addX (x) {	//scalar addition
+		this.x += x;
+		return this;
+	}
+	
+	addY (y) {	//scalar addition
+		this.y += y;
+		return this;
+	}
 	
 	subtract (v) {
 		this.x -= v.x;
 		this.y -= v.y;
+		return this;
+	}
+
+	subtractX (x) {
+		this.x -= x;
+		return this;
+	}
+
+	subtractY (y) {
+		this.y -= y;
 		return this;
 	}
 	

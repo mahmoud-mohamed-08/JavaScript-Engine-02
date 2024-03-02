@@ -18,8 +18,9 @@ export class RigidBody {
 		//update vertices and aabb of shape if it is rectangle
 		if (this.shape instanceof Rect) {
 			this.shape.updateVertices();
-			this.shape.updateAabb();
 		}
+		//update aabb
+		this.shape.updateAabb();
     } 
 
 }

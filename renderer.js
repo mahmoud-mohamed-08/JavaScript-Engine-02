@@ -5,6 +5,8 @@ export class Renderer {
     constructor(canv, ctx) {
         this.canvas = canv;
         this.ctx = ctx;
+        this.renderedAlways = [];
+        this.renderedNextFrame = [];
     }
     
     drawFrame(objects, fillCol, bordCol) {
@@ -12,13 +14,16 @@ export class Renderer {
             const shape = objects[i].shape;
             shape.draw(this.ctx, fillCol, bordCol);
             shape.aabb.draw(this.ctx, "red");
-            //draw vertices
-            if (shape instanceof Rect) {
-                shape.vertices.forEach(vertex => {
-                    vertex.drawPoint(this.ctx, "black");
-                });
-            }
-        } 
+        }
+        for (let i = 0; i<this.renderedNextFrame.length; i++) {
+            this.renderedNextFrame[i].draw(this.ctx, bordCol);   //draw each item from the list
+        }
+        this.renderedNextFrame = [];    //clear the array, basically means we only draw them once
+
+        for (let i = 0; i<this.renderedAlways.length; i++) {
+            this.renderedAlways[i].draw(this.ctx, bordCol);
+        }
+
     }
 
     clearFrame() {

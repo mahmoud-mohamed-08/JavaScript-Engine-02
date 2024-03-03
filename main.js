@@ -124,3 +124,31 @@ function addObject(shape) {
     const object = new RigidBody(shape);  
     objects.push(object);
 } 
+
+//test code
+const a = 1;
+const b = 2;
+
+if (a > 0 || b < 2) {
+    console.log(1);
+}
+
+if (a > 0 && b < 2) {
+    console.log(2);
+}
+
+if (!(a > 0 && b > 2)) {
+    console.log(5);
+}
+
+let grade;
+let score = -100; //declare a variable
+switch (true) {
+    case (score < 0): grade = "Invalid Grade"; break;
+    case (score < 60): grade = "F"; break;
+    case (score < 70): grade = "D"; break;
+    case (score < 80): grade = "C"; break;
+    case (score < 90): grade = "B"; break;
+    default: grade = "A";
+}
+console.log(grade);

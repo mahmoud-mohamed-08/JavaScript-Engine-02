@@ -2,6 +2,7 @@ export class Vec {
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;
+		this.renderOrigin;
 	}
     //chainable methods
 	copy (v) {	//copy the xy of another vector into this
@@ -100,12 +101,26 @@ export class Vec {
 		return this.clone().subtract(v).magnitude();
 	}
 
-	drawPoint(ctx, strokeColor) {
-		ctx.beginPath();
-        ctx.arc(this.x, this.y, 5, 0, Math.PI*2, true);	//radius 5
-        ctx.closePath();
-        ctx.strokeStyle = strokeColor;
+	draw(ctx, strokeColor) {
+		if (this.color) {
+			ctx.strokeStyle = this.color;
+		} else {
+			ctx.strokeStyle = strokeColor;
+		}
         ctx.lineWidth = 3;
+		const renderEnd = this.renderOrigin.clone().add(this);
+		//line from vector tail to vector head
+		ctx.beginPath();
+		ctx.moveTo(this.renderOrigin.x, this.renderOrigin.y);
+		ctx.lineTo(renderEnd.x, renderEnd.y);
+
+		ctx.stroke();
+
+		//circle at vector head
+		ctx.beginPath();
+        ctx.arc(renderEnd.x, renderEnd.y, 5, 0, Math.PI*2, true);	//radius 5
+        ctx.closePath();
+        
         ctx.stroke();
 	}
 }

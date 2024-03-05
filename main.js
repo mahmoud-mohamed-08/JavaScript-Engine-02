@@ -4,6 +4,7 @@ import {Rect} from './rect.js';
 import {Input} from './input.js';
 import {RigidBody} from './rigidBody.js';
 import {Collisions} from './collisions.js';
+import {Vec} from './vector.js';
 
 const SMALLEST_RADIUS = 10;
 const dt = 1/60;    //time per frame
@@ -86,7 +87,6 @@ function updateAndDraw() {
     //COLLISIONS
     col.clearCollisions();
     col.broadPhazeDetection(objects);
-    console.log(col.possibleCollisions.length);
     col.narrowPhazeDetection(objects);  //detect all possible collisions
     col.resolveCollisions();    //push off
 
@@ -124,3 +124,30 @@ function addObject(shape) {
     const object = new RigidBody(shape);  
     objects.push(object);
 } 
+
+//test code
+let grade;
+let score = -100; //declare a variable
+switch (true) {
+    case (score < 0): grade = "Invalid Grade"; break;
+    case (score < 60): grade = "F"; break;
+    case (score < 70): grade = "D"; break;
+    case (score < 80): grade = "C"; break;
+    case (score < 90): grade = "B"; break;
+    default: grade = "A";
+}
+
+const origin = new Vec(100, 100);
+
+const vector1 = new Vec(50, 60);
+vector1.renderOrigin = origin;
+vector1.color = "red";
+
+const vector2 = new Vec(-50, 60);
+vector2.renderOrigin = origin;
+vector2.color = "blue";
+
+const testVector = vector1.clone().add(vector2);
+testVector.renderOrigin = origin;
+
+renderer.renderedAlways.push(vector1, vector2, testVector);

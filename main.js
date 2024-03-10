@@ -125,4 +125,47 @@ function addObject(shape) {
     objects.push(object);
 } 
 
+const grades = [99, 92, 93, 96, 89]; //array - list of values
 
+//accessing elements of an array
+//what is my first grade?
+console.log(grades[0]);
+
+//how many grades do I have in total?
+console.log(grades.length); //shows how many elements in the array (5)
+
+//let's see my last grade
+console.log(grades[grades.length-1]);
+
+//change my third grade, make it 100, then log it
+console.log(grades[2]);
+grades[2] = 100;
+console.log("My new grade is " +grades[2]);
+
+//check if my grades are an array - instanceof Array
+console.log((grades instanceof Array)); //true - grades is an array
+
+//looping array elements
+for (let i = 0; i < grades.length; i++) {
+    grades[i] = 100;
+}
+console.log("My grades are" +grades);
+
+// for (let i = grades.length-1; i >= 0; i--) {
+//     grades[i] = 100;
+// }
+// console.log("My grades are" +grades);
+
+//lets make all grades 0, use forEach
+
+grades.forEach(grade => {
+    console.log(grade);
+});
+
+grades.push(90);    //push adds element to the end of the array
+console.log("My new grades are" +grades);
+grades.unshift(90); //adds an element to the beginning of the array
+console.log("My newer grades are" +grades);
+
+grades.splice(grades.length-1, 1);  //(i,n) starts at i, removes n elements
+console.log("My newest grades are" +grades);

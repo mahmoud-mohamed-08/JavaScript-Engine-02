@@ -1,4 +1,6 @@
 import {Circle} from './circle.js';
+import {Rect} from './rect.js';
+import {renderer} from './main.js';
 
 export class Collisions {
     constructor() {
@@ -28,6 +30,14 @@ export class Collisions {
                         objects[j].shape instanceof Circle) {
                         this.detectCollisionCircleCircle(objects[i], objects[j]);
                     }   //later detect rectangle rectangle here
+                    else if (objects[i].shape instanceof Circle && 
+                        objects[j].shape instanceof Rect) {
+                            this.findClosestVertex(objects[j].shape.vertices, objects[i].shape.position);
+                    }
+                    else if (objects[i].shape instanceof Rect && 
+                        objects[j].shape instanceof Circle) {
+                            this.findClosestVertex(objects[i].shape.vertices, objects[j].shape.position);
+                    }
                 }
             }
         }
@@ -61,6 +71,20 @@ export class Collisions {
     }
 
     //detect rectangles collisions
+
+    findClosestVertex (vertices, center) {  //returns the i of the closest of vertices to a center point
+        let minDist = Number.MAX_VALUE;
+        let vertexDist, closestVertex;
+        for (let i=0; i<vertices.length; i++) {
+            vertexDist = vertices[i].distanceTo(center);
+            if (vertexDist < minDist) {
+                minDist = vertexDist;
+                closestVertex = vertices[i];
+            }
+        }
+        renderer.renderedNextFrame.push(closestVertex);
+        return closestVertex;
+    }
 
     pushOffObjects(o1, o2, overlap, normal) {
         o1.shape.position.subtract(normal.clone().multiply(overlap/2));

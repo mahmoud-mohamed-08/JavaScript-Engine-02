@@ -125,59 +125,47 @@ function addObject(shape) {
     objects.push(object);
 } 
 
-//test code
-let grade;
-let score = -100; //declare a variable
-switch (true) {
-    case (score < 0): grade = "Invalid Grade"; break;
-    case (score < 60): grade = "F"; break;
-    case (score < 70): grade = "D"; break;
-    case (score < 80): grade = "C"; break;
-    case (score < 90): grade = "B"; break;
-    default: grade = "A";
+const grades = [99, 92, 93, 96, 89]; //array - list of values
+
+//accessing elements of an array
+//what is my first grade?
+console.log(grades[0]);
+
+//how many grades do I have in total?
+console.log(grades.length); //shows how many elements in the array (5)
+
+//let's see my last grade
+console.log(grades[grades.length-1]);
+
+//change my third grade, make it 100, then log it
+console.log(grades[2]);
+grades[2] = 100;
+console.log("My new grade is " +grades[2]);
+
+//check if my grades are an array - instanceof Array
+console.log((grades instanceof Array)); //true - grades is an array
+
+//looping array elements
+for (let i = 0; i < grades.length; i++) {
+    grades[i] = 100;
 }
+console.log("My grades are" +grades);
 
+// for (let i = grades.length-1; i >= 0; i--) {
+//     grades[i] = 100;
+// }
+// console.log("My grades are" +grades);
 
-//addition
-const origin = new Vec(100, 100);
+//lets make all grades 0, use forEach
 
-const vector1 = new Vec(50, 60);
-vector1.renderOrigin = origin;
-vector1.color = "red";
-
-const vector2 = new Vec(-50, 60);
-vector2.renderOrigin = origin;
-vector2.color = "blue";
-
-const testVector = vector1.clone().add(vector2);
-testVector.renderOrigin = origin;
-
-renderer.renderedAlways.push(vector1, vector2, testVector);
-renderer.texts.push({
-    text: "Vector Addition", 
-    position: origin.clone().addX(-50).addY(-20), 
-    color: "green", 
-    font: "15px serif"
+grades.forEach(grade => {
+    console.log(grade);
 });
 
-//subtraction
-const origin2 = new Vec(200, 200);
+grades.push(90);    //push adds element to the end of the array
+console.log("My new grades are" +grades);
+grades.unshift(90); //adds an element to the beginning of the array
+console.log("My newer grades are" +grades);
 
-const vector3 = new Vec(100, 100);
-vector3.renderOrigin = origin2;
-vector3.color = "red";
-
-const vector4 = new Vec(80, -20);
-vector4.renderOrigin = origin2;
-vector4.color = "blue";
-
-const differenceVector = vector3.clone().subtract(vector4);
-differenceVector.renderOrigin = origin2;
-
-renderer.renderedAlways.push(vector3, vector4, differenceVector);
-renderer.texts.push({
-    text: "Vector Subtraction", 
-    position: origin2.clone().addY(-30), 
-    color: "green", 
-    font: "15px serif"
-});
+grades.splice(grades.length-1, 1);  //(i,n) starts at i, removes n elements
+console.log("My newest grades are" +grades);

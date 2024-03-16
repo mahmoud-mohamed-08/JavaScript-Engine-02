@@ -169,3 +169,52 @@ console.log("My newer grades are" +grades);
 
 grades.splice(grades.length-1, 1);  //(i,n) starts at i, removes n elements
 console.log("My newest grades are" +grades);
+
+//creating objects
+const gradesObject = {
+    math: 99,
+    bio: 95,
+    chem: 96,
+    english: 98,
+    bestGrade: "math",
+
+    setBioGrade: function (grade) {
+        this.bio = grade;
+    },
+
+    setGrade: function(grade, subject) {
+        subject = grade;
+    }
+};
+//accessing object properties
+console.log(gradesObject.bestGrade);
+console.log(gradesObject["bestGrade"]);
+
+gradesObject.bio = 100;
+console.log(gradesObject);
+
+//object methods
+gradesObject.setBioGrade(90);
+console.log(gradesObject);
+
+class GradesClass {
+    constructor(mathGrade, bio, chem, engl, bestGr) {   //constructor method creates the object
+        this.math = mathGrade;
+        this.bio = bio;
+        this.chem = chem;
+        this.english = engl;
+        this.bestGrade = bestGr;
+    }
+    //other object methods
+    addBio(score) {
+        this.bio += score;
+    }
+
+}
+
+const myGrades = new GradesClass(99, 90, 91, 89, "math");   //new keyword calls constructor
+const seikohGrades = new GradesClass(91, 95, 92, 93, "bio");
+console.log(myGrades);
+console.log(seikohGrades);
+seikohGrades.addBio(2);
+console.log(seikohGrades);

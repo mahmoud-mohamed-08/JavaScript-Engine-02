@@ -71,6 +71,66 @@ export class Collisions {
     }
 
     //detect rectangles collisions
+    detectCollisionCirclePolygon (c, p) {
+        const vertices = p.shape.vertices;
+        const cShape = c.shape;
+        let overlap, normal, axis;
+
+        overlap = Number.MAX_VALUE;
+
+        for (let i = 0; i < vertices.length; i++) {
+            const v1 = vertices[i];
+            const v2 = vertices[(i+1)%vertices.length];
+            axis = v2.clone().subtract(v1).rotateCCW90().normalize();
+            const [min1, max1] = this.projectVertices(vertices, axis);
+            const [min2, max2] = this.projectCircle(center, radius, axis);
+            
+            if (min2 >= max1 || min1 >= max2){
+                //we dont have collision
+                return;
+            }
+
+            const axisOverlap = Math.min(max2-min1, max1-min2); //finds smallest overlap
+            if (overlap >= axisOverlap) {
+                overlap = axisOverlap;
+            }
+        }
+    }
+
+    projectVertices (vertices, axis) {
+        let min, max;
+        min = vertices[0].dot(axis);    //first vertex projection
+        max = min;  //save it as both min and max
+
+        for (let i = 1; i < vertices.length; i++) {
+            const proj = vertices[i].dot(axis); //projections for all other vertices
+            if (proj < min) {
+                min = proj;
+            }
+            if (proj > max) {
+                max = proj;
+            }
+        }
+
+        return [min, max];  //smallest and largest projection
+    }
+
+    projectCircle (center, radius, axis) {
+        let min, max;
+        //points on circle distance 1 radius from center
+        const points = [center.clone().moveDistInDir(radius, axis), center.clone().moveDistInDir(-radius, axis)];
+        
+        min = points[0].dot(axis);  //project points
+        max = points[1].dot(axis);
+        
+        if (min > max) {    //swap min and max if we chose wrong
+            const t = min;
+            min = max;
+            max = t;
+        }
+
+        return [min, max];
+    }
 
     findClosestVertex (vertices, center) {  //returns the i of the closest of vertices to a center point
         let minDist = Number.MAX_VALUE;

@@ -125,47 +125,53 @@ function addObject(shape) {
     objects.push(object);
 } 
 
-const grades = [99, 92, 93, 96, 89]; //array - list of values
+//creating objects
+const gradesObject = {
+    math: 99,
+    bio: 95,
+    chem: 96,
+    english: 98,
+    bestGrade: "math",
 
-//accessing elements of an array
-//what is my first grade?
-console.log(grades[0]);
+    setBioGrade: function (grade) {
+        this.bio = grade;
+    },
 
-//how many grades do I have in total?
-console.log(grades.length); //shows how many elements in the array (5)
+    setGrade: function(grade, subject) {
+        this[subject] = grade;
+    }
+};
+//accessing object properties
+// console.log(gradesObject.bestGrade);
+console.log(gradesObject["bestGrade"]);
 
-//let's see my last grade
-console.log(grades[grades.length-1]);
+gradesObject.bio = 100;
+// console.log(gradesObject);
 
-//change my third grade, make it 100, then log it
-console.log(grades[2]);
-grades[2] = 100;
-console.log("My new grade is " +grades[2]);
+//object methods
+gradesObject.setBioGrade(90);
+gradesObject.setGrade(91, "math");
+gradesObject.setGrade(94, "chem");
+console.log(gradesObject);
 
-//check if my grades are an array - instanceof Array
-console.log((grades instanceof Array)); //true - grades is an array
+class GradesClass {
+    constructor(mathGrade, bio, chem, engl, bestGr) {   //constructor method creates the object
+        this.math = mathGrade;
+        this.bio = bio;
+        this.chem = chem;
+        this.english = engl;
+        this.bestGrade = bestGr;
+    }
+    //other object methods
+    addBio(score) {
+        this.bio += score;
+    }
 
-//looping array elements
-for (let i = 0; i < grades.length; i++) {
-    grades[i] = 100;
 }
-console.log("My grades are" +grades);
 
-// for (let i = grades.length-1; i >= 0; i--) {
-//     grades[i] = 100;
-// }
-// console.log("My grades are" +grades);
-
-//lets make all grades 0, use forEach
-
-grades.forEach(grade => {
-    console.log(grade);
-});
-
-grades.push(90);    //push adds element to the end of the array
-console.log("My new grades are" +grades);
-grades.unshift(90); //adds an element to the beginning of the array
-console.log("My newer grades are" +grades);
-
-grades.splice(grades.length-1, 1);  //(i,n) starts at i, removes n elements
-console.log("My newest grades are" +grades);
+const myGrades = new GradesClass(99, 90, 91, 89, "math");   //new keyword calls constructor
+const seikohGrades = new GradesClass(91, 95, 92, 93, "bio");
+// console.log(myGrades);
+// console.log(seikohGrades);
+seikohGrades.addBio(2);
+// console.log(seikohGrades);

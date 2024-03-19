@@ -32,11 +32,11 @@ export class Collisions {
                     }   //later detect rectangle rectangle here
                     else if (objects[i].shape instanceof Circle && 
                         objects[j].shape instanceof Rect) {
-                            this.findClosestVertex(objects[j].shape.vertices, objects[i].shape.position);
+                            this.detectCollisionCirclePolygon(objects[i], objects[j]);
                     }
                     else if (objects[i].shape instanceof Rect && 
                         objects[j].shape instanceof Circle) {
-                            this.findClosestVertex(objects[i].shape.vertices, objects[j].shape.position);
+                            this.detectCollisionCirclePolygon(objects[j], objects[i]);
                     }
                 }
             }

@@ -120,7 +120,13 @@ export class Collisions {
             normal.invert();
         }
 
-        
+        //add collision info
+        this.collisions.push({
+            collidedPair: [c, p],
+            overlap: overlap,
+            normal: normal,       //direction from c1 to c2
+        });
+
     }
 
     projectVertices (vertices, axis) {

@@ -78,6 +78,7 @@ export class Collisions {
 
         overlap = Number.MAX_VALUE;
 
+        //find overlaps for axes perpendicular to polygon edges
         for (let i = 0; i < vertices.length; i++) {
             const v1 = vertices[i];
             const v2 = vertices[(i+1)%vertices.length];
@@ -95,6 +96,25 @@ export class Collisions {
                 overlap = axisOverlap;
             }
         }
+
+        //find overlaps for axis from polygon closest vertex to center of circle
+        const closestVertex = this.findClosestVertex(vertices, cShape.position);
+        axis = closestVertex.clone().subtract(cShape.position).normalize(); //axis from circle to closest vertex on polygon
+        
+        const [min1, max1] = this.projectVertices(vertices, axis);
+        const [min2, max2] = this.projectCircle(cShape.position, cShape.radius, axis);
+        if (min1 >= max2 || min2 >= max1) {
+            return;
+        }
+
+        const axisOverlap = Math.min(max2-min1, max1-min2); //find on which axis we have the smallest overlap
+        if (axisOverlap < overlap) {
+            overlap = axisOverlap;
+            normal = axis;
+        }
+
+        
+
     }
 
     projectVertices (vertices, axis) {

@@ -84,7 +84,7 @@ export class Collisions {
             const v2 = vertices[(i+1)%vertices.length];
             axis = v2.clone().subtract(v1).rotateCCW90().normalize();
             const [min1, max1] = this.projectVertices(vertices, axis);
-            const [min2, max2] = this.projectCircle(center, radius, axis);
+            const [min2, max2] = this.projectCircle(cShape.position, cShape.radius, axis);
             
             if (min2 >= max1 || min1 >= max2){
                 //we dont have collision
@@ -94,6 +94,7 @@ export class Collisions {
             const axisOverlap = Math.min(max2-min1, max1-min2); //finds smallest overlap
             if (overlap >= axisOverlap) {
                 overlap = axisOverlap;
+                normal = axis;
             }
         }
 

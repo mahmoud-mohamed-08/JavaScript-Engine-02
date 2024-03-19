@@ -113,8 +113,14 @@ export class Collisions {
             normal = axis;
         }
 
-        
+        //set correct direction of the collision normal 
+        //(direction of collision from 1st to 2nd object)
+        const vec1to2 = p.shape.position.clone().subtract(c.shape.position);  //gives correct direction for normal
+        if (normal.dot(vec1to2) < 0) { 
+            normal.invert();
+        }
 
+        
     }
 
     projectVertices (vertices, axis) {

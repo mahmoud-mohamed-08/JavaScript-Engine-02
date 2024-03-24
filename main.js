@@ -161,3 +161,60 @@ console.timeEnd('Timer1');
 
 
 //practice debugging
+let crewReady = false;
+let fuelReady = false;
+let fuelLevel = 17000;
+let crewStatus = true;
+let computerStatus = 'green';
+//block1
+if (fuelLevel >= 20000) {
+   console.log('Fuel level cleared.');
+   fuelReady = true;
+} else {
+   console.log('WARNING: Insufficient fuel!');
+   fuelReady = false;
+}
+
+//block2
+if (crewStatus && computerStatus === 'green'){
+   console.log('Crew & computer cleared.');
+   crewReady = true;
+} else {
+   console.log('WARNING: Crew or computer not ready!');
+   crewReady = false;
+}
+
+if (crewReady && fuelReady) {
+   console.log('10, 9, 8, 7, 6, 5, 4, 3, 2, 1...');
+   console.log('Liftoff!');
+} else {
+   console.log('Launch scrubbed.');
+}
+
+
+// let launchReady = false;
+// let fuelLevel = 17000;
+// let crewStatus = true;
+// let computerStatus = 'green';
+
+// if (fuelLevel >= 20000 && crewStatus && computerStatus === 'green') {
+//    console.log('Fuel level cleared.');
+//    console.log('Crew & computer cleared.');
+//    launchReady = true;
+// } else {
+
+//    if (fuelLevel < 20000) {
+//        console.log('WARNING: Insufficient fuel!');
+//    }
+//    if (!crewStatus || computerStatus !== 'green') {
+//        console.log('WARNING: Crew or computer not ready!');
+//    }
+//    launchReady = false;
+// }
+
+// if (launchReady) {
+//    console.log('10, 9, 8, 7, 6, 5, 4, 3, 2, 1...');
+//    console.log('Liftoff!');
+// } else {
+//    console.log('Launch scrubbed.');
+// }

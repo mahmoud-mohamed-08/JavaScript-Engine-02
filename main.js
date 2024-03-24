@@ -134,5 +134,30 @@ if (e != 5) {
 }
 console.log(c);
 console.log(e);
-console.warn(e);
-console.error(c);
+// console.warn(e);
+// console.error(c);
+
+
+//console.table
+var animals = [
+    { animal: 'Horse', name: 'Henry', age: 43 },
+    { animal: 'Dog', name: 'Fred', age: 13 },
+    { animal: 'Cat', name: 'Frodo', age: 18 }
+];
+ 
+console.table(animals);
+
+
+//test console.time
+console.time('Timer1');
+ 
+var items = [];
+ 
+for(var i = 0; i < 100000; i++){
+   items.push({index: i});
+}
+ 
+console.timeEnd('Timer1');
+
+
+//practice debugging

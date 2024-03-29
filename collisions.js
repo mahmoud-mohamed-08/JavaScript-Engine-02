@@ -236,6 +236,11 @@ export class Collisions {
             }
         }
         
+        this.collisions.push({
+            collidedPair: [o1, o2],
+            overlap: smallestOverlap,
+            normal: normal,       //direction from o1 to o2, normal points out of o1
+        });
     }
 
     calculateEdges(vertices) {

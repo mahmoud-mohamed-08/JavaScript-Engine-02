@@ -199,7 +199,8 @@ export class Collisions {
         }
         //check if axes are not on the back side of rectangle
         for (let i = 0; i < axes1.length; i++) {
-            if(axes1[i].dot(vector1to2) < 0) {
+            const axis = axes1[i];
+            if(axis.dot(vector1to2) < 0) {
                 //axis is in the wrong direction, i.e it is on the backside of rectangle
                 continue;
             }

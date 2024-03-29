@@ -195,7 +195,7 @@ export class Collisions {
         const edges1 = this.calculateEdges(vertices1);
         const axes1 = [];
         for (let i = 0; i < edges1.length; i++) {
-            axes1.push(edges1.rotateCCW90().normalize());
+            axes1.push(edges1[i].rotateCCW90().normalize());
         }
         //check if axes are not on the back side of rectangle
         for (let i = 0; i < axes1.length; i++) {
@@ -216,11 +216,11 @@ export class Collisions {
         }
 
         //object2 edges
-        const vector2to1 = vector1to2.clone.invert();
+        const vector2to1 = vector1to2.clone().invert();
         const edges2 = this.calculateEdges(vertices2);
         const axes2 = [];
         for (let i = 0; i < edges2.length; i++) {
-            axes1.push(edges2.rotateCCW90().normalize());
+            axes2.push(edges2[i].rotateCCW90().normalize());
         }
         for (let i = 0; i < axes2.length; i++) {
             const axis = axes2[i];
@@ -236,6 +236,8 @@ export class Collisions {
             }
         }
         
+        const normal = this.correctNormalDirection(collisionNormal, o1, o2);
+
         this.collisions.push({
             collidedPair: [o1, o2],
             overlap: smallestOverlap,
@@ -267,6 +269,16 @@ export class Collisions {
             overlap: Math.min(max2-min1, max1-min2),
             normal: axis.clone(),
         };
+    }
+
+    correctNormalDirection(normal, o1, o2) {
+        const vecO1O2 = o2.shape.position.clone().subtract(o1.shape.position);
+        const dot = normal.dot(vecO1O2);
+        if (dot >= 0) {
+            return normal;
+        } else {
+            return normal.invert();
+        }
     }
 
     pushOffObjects(o1, o2, overlap, normal) {

@@ -214,6 +214,27 @@ export class Collisions {
                 collisionNormal = normal;
             }
         }
+
+        //object2 edges
+        const vector2to1 = vector1to2.clone.invert();
+        const edges2 = this.calculateEdges(vertices2);
+        const axes2 = [];
+        for (let i = 0; i < edges2.length; i++) {
+            axes1.push(edges2.rotateCCW90().normalize());
+        }
+        for (let i = 0; i < axes2.length; i++) {
+            const axis = axes2[i];
+            if(axis.dot(vector2to1) < 0) {
+                continue;
+            }
+            const { overlap, normal } = this.calculateOverlap(vertices1, vertices2, axis);
+            if (overlap <= 0) {
+                return;
+            } else if (overlap < smallestOverlap) {
+                smallestOverlap = overlap;
+                collisionNormal = normal;
+            }
+        }
         
     }
 

@@ -7,6 +7,7 @@ import {Collisions} from './collisions.js';
 import {Vec} from './vector.js';
 
 const SMALLEST_RADIUS = 10;
+const WORLD_SIZE = 5000;
 const dt = 1/60;    //time per frame
 
 const canv = document.getElementById("canvas");
@@ -88,7 +89,16 @@ function updateAndDraw() {
     col.clearCollisions();
     col.broadPhazeDetection(objects);
     col.narrowPhazeDetection(objects);  //detect all possible collisions
-    col.resolveCollisions();    //push off
+    col.resolveCollisionsLinear();    //push off
+
+    //remove objects that are too far
+    const objectsToRemove = [];
+    for (let i=0; i<objects.length; i++) {
+        if (objects[i].checkTooFar(WORLD_SIZE)) {
+            objectsToRemove.push(objects[i]);
+        }
+    }
+    removeObjects(objectsToRemove);
 
     //draw objects
     renderer.clearFrame();
@@ -121,6 +131,32 @@ function moveObjectWithMouse(object) {
 }
 
 function addObject(shape) {
-    const object = new RigidBody(shape);  
+    const object = new RigidBody(shape);
+    object.setMass();  
     objects.push(object);
+    console.log(object.mass, object.inverseMass);
 } 
+
+function removeObjects(objectsToRemove) {
+    for (let i=0; i<objects.length; i++) {
+        for (let j=0; j<objectsToRemove.length; j++) {
+            if (objects[i] == objectsToRemove[j]) {
+                objects.splice(i, 1);
+            }
+        }
+    }
+}
+
+//1 relative velocity
+const velocityTruckEarth = new Vec (0, 70);
+const velocityEarthTruck = velocityTruckEarth.invert();
+const velocityCarEarth = new Vec (80, 0);
+const velocityCarTruck = velocityCarEarth.add(velocityEarthTruck);
+console.log(velocityCarTruck.magnitude());
+console.log(velocityCarTruck.angle());
+
+//2 coefficient of restitution e
+const bounceHeight = 1100;
+const dropHeight = 1685;
+const e = Math.sqrt(bounceHeight / dropHeight);
+console.log(e);

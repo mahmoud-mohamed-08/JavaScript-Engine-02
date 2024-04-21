@@ -317,16 +317,18 @@ export class Collisions {
 
     resolveCollisionsWithBounceOff() {
         let collidedPair, overlap, normal, o1, o2;
+        console.log(true);
         for(let i=0; i<this.collisions.length; i++) {
             ({collidedPair, overlap, normal} = this.collisions[i]);
             [o1, o2] = collidedPair;
             this.pushOffObjects(o1, o2, overlap, normal);
             this.bounceOffObjects(o1, o2, normal);
+            
         }
     }
 
     resolveCollisionsWithRotation() {
-        
+
     }
 
 

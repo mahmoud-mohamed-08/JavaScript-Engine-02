@@ -130,12 +130,14 @@ export class Collisions {
         if (normal.dot(vec1to2) < 0) { 
             normal.invert();
         }
-
+        const point = this.findContactPointCirclePolygon(cShape.position, vertices);
+        renderer.renderedNextFrame.push(point);
         //add collision info
         this.collisions.push({
             collidedPair: [c, p],
             overlap: overlap,
             normal: normal,       //direction from c1 to c2
+            point: point,
         });
 
     }
@@ -185,7 +187,6 @@ export class Collisions {
                 closestVertex = vertices[i];
             }
         }
-        renderer.renderedNextFrame.push(closestVertex);
         return closestVertex;
     }
 
@@ -300,8 +301,22 @@ export class Collisions {
         } else {
             closest = a.clone().add(vAB.multiply(d));
         }
-        renderer.renderedNextFrame.push(closest);
         return [closest, p.distanceToSq(closest)];
+    }
+
+    findContactPointCirclePolygon(circleCenter, polygonVertices) {
+        let contact, v1, v2;
+        let shortestDist = Number.MAX_VALUE;
+        for (let i=0; i<polygonVertices.length; i++) {
+            v1 = polygonVertices[i];
+            v2 = polygonVertices[(i+1)%polygonVertices.length];
+            const info = this.findClosestPointSegment(circleCenter, v1, v2);    //closest and distSq
+            if(info[1] < shortestDist) {
+                contact = info[0];
+                shortestDist = info[1];
+            }
+        }
+        return contact;
     }
 
     pushOffObjects(o1, o2, overlap, normal) {

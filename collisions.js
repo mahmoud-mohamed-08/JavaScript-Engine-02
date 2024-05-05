@@ -10,6 +10,8 @@ export class Collisions {
         this.possibleCollisions = [];
         this.collisions = [];
         this.e = 0.5;   //coefficient of restitution
+        this.kf = 0.3;
+        this.sf = 0.5;  //sf must be greater than kf sf >= kf
     }
 
     clearCollisions() {
@@ -490,7 +492,6 @@ export class Collisions {
             [o1, o2] = collidedPair;
             this.pushOffObjects(o1, o2, overlap, normal);
             this.bounceOffObjects(o1, o2, normal);
-            
         }
     }
 
@@ -504,6 +505,4 @@ export class Collisions {
             this.addFriction(o1, o2, normal, point, j);
         }
     }
-
-
 }

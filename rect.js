@@ -62,13 +62,13 @@ export class Rect {
 
 
 
-	draw(ctx, fillColor, strokeColor) {
+	draw(ctx, fillCol, strokeColor) {
         ctx.save();
         ctx.translate(this.position.x, this.position.y);
         ctx.rotate(this.orientation);
-        if (fillColor) {    //remove
+        {    //remove
             //instead of fillColor, use this.fillCol for fillStyle
-            ctx.fillStyle = fillColor;
+            ctx.fillStyle = this.fillCol;
             ctx.fillRect(
                 - this.width/2,
                 - this.height/2,

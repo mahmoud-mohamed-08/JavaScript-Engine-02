@@ -35,7 +35,7 @@ addObject(
         new Vec (canv.width / 2, canv.height),
         3*canv.width, 
         canv.height*0.7,
-        fillCol="blue"
+        fillCol="blue"  //wrong! dont assign the value blue to fillCol, just pass the value "blue" as an argument
         //add color here
     ),
     true    //it is fixed

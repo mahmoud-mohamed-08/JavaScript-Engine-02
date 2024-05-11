@@ -16,7 +16,7 @@ const ctx = canv.getContext("2d");
 export const renderer = new Renderer(canv, ctx);
 let colorSelected;
 let typeSelected;
-let fillCol = "Black";
+let fillCol = "red";
 let bordCol = "darkGray";
 
 
@@ -29,18 +29,16 @@ inp.addListeners();
 
 const objects = [];
 //ground object
-ctx.beginPath();
 addObject(
     new Rect (
         new Vec (canv.width / 2, canv.height),
         3*canv.width, 
         canv.height*0.7,
-        fillCol="blue"  //wrong! dont assign the value blue to fillCol, just pass the value "blue" as an argument
+        "blue"  //wrong! dont assign the value blue to fillCol, just pass the value "blue" as an argument
         //add color here
     ),
     true    //it is fixed
 );
-ctx.closePath();
 
 let shapeBeingMade = null;
 
@@ -81,13 +79,13 @@ selectType.addEventListener("change", function () {
 //MAIN LOOP
 function updateAndDraw() {
 
-    console.log(colorSelected);
     switch (true) {
         case colorSelected == 0: fillCol = "red"; break;
         case colorSelected == 1: fillCol = "green"; break;
         case colorSelected == 2: fillCol = "blue"; break;
         case colorSelected == 3: fillCol = "yellow"; break;
     }
+    console.log(colorSelected);
 
     switch (true) {
         case typeSelected == 0: bordCol = "red"; break;
@@ -102,7 +100,7 @@ function updateAndDraw() {
     if (inp.inputs.lclick && shapeBeingMade == null) {
         //lesson 03 - make rectangles with mouse
         if (shapeSelected == 'c') {
-            shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0);
+            shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0, colorSelected);
         } else if (shapeSelected == 'r') {
             shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2, colorSelected);    //remember to add input colorSelected when you make the new rectangle because you changed the constructor of Rect class
         }

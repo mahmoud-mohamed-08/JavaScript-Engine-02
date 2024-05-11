@@ -14,8 +14,11 @@ const canv = document.getElementById("canvas");
 const ctx = canv.getContext("2d");
 
 export const renderer = new Renderer(canv, ctx);
-const fillCol = "darkGray";
-const bordCol = "black";
+let colorSelected;
+let typeSelected;
+let fillCol = "Black";
+let bordCol = "darkGray";
+
 
 const col = new Collisions();
 
@@ -28,7 +31,7 @@ const objects = [];
 //ground object
 addObject(
     new Rect (
-        new Vec (canv.width / 2, canv.height),
+        new Vec (canv.width / 2, canv.height, fillCol="red"),
         3*canv.width, 
         canv.height*0.7
     ),
@@ -40,6 +43,7 @@ let shapeBeingMade = null;
 let shapeSelected = 'r';
 let gravitySelected = 2;
 let colMode = 2;
+
 
 //button variables
 const circleButton = document.getElementById("c");
@@ -60,9 +64,35 @@ const selectCollisions = document.getElementById("collisions");
 selectCollisions.addEventListener("change", function () {
     colMode = selectCollisions.value;
 });
+const selectColor = document.getElementById("colorFill");
+selectColor.addEventListener("change", function () {
+    colorSelected = selectColor.value;
+});
+const selectType = document.getElementById("colorBord");
+selectType.addEventListener("change", function () {
+    typeSelected = selectType.value;
+});
+
 
 //MAIN LOOP
 function updateAndDraw() {
+
+    console.log(colorSelected);
+    switch (true) {
+        case colorSelected == 0: fillCol = "red"; break;
+        case colorSelected == 1: fillCol = "green"; break;
+        case colorSelected == 2: fillCol = "blue"; break;
+        case colorSelected == 3: fillCol = "yellow"; break;
+    }
+
+    switch (true) {
+        case typeSelected == 0: bordCol = "red"; break;
+        case typeSelected == 1: bordCol = "green"; break;
+        case typeSelected == 2: bordCol = "blue"; break;
+        case typeSelected == 3: bordCol = "yellow"; break;
+    }
+    //console.log(fillCol);
+
 
     //make objects
     if (inp.inputs.lclick && shapeBeingMade == null) {
@@ -104,6 +134,9 @@ function updateAndDraw() {
         moveObjectWithMouse(inp.inputs.mouse.movedObject);
     }
 
+    
+
+
     //set gravity
     let g = 200;
     //update g based on input
@@ -113,6 +146,7 @@ function updateAndDraw() {
         case gravitySelected == 2: g = 200; break;
         case gravitySelected == 3: g = 2000; break;
     }
+
 
     //set object accelerations
     for(let i=1; i<objects.length; i++) {

@@ -24,7 +24,7 @@ export class Circle {
         return inertia;
     }
 
-	draw(ctx, strokeColor, fillColor) {
+	draw(ctx, fillColor, strokeColor) {
         ctx.beginPath();
         ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2, true);
         ctx.closePath();

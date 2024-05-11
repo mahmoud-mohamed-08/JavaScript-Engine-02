@@ -58,7 +58,7 @@ export class Rect {
         return inertia;
     }
 
-	draw(ctx, strokeColor, fillColor) {
+	draw(ctx, fillColor, strokeColor) {
         ctx.save();
         ctx.translate(this.position.x, this.position.y);
         ctx.rotate(this.orientation);

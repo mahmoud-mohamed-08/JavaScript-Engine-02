@@ -34,8 +34,7 @@ addObject(
         new Vec (canv.width / 2, canv.height),
         3*canv.width, 
         canv.height*0.7,
-        "darkCyan"  //wrong! dont assign the value blue to fillCol, just pass the value "blue" as an argument
-        //add color here
+        "darkCyan", "darkGray"
     ),
     true    //it is fixed
 );
@@ -99,9 +98,9 @@ function updateAndDraw() {
     if (inp.inputs.lclick && shapeBeingMade == null) {
         //lesson 03 - make rectangles with mouse
         if (shapeSelected == 'c') {
-            shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0, fillCol);
+            shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0, fillCol, bordCol);
         } else if (shapeSelected == 'r') {
-            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2, fillCol);
+            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2, fillCol, bordCol);
         }
         
     }

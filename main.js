@@ -29,14 +29,16 @@ inp.addListeners();
 
 const objects = [];
 //ground object
+ctx.beginPath();
 addObject(
     new Rect (
-        new Vec (canv.width / 2, canv.height, fillCol="red"),
+        new Vec (canv.width / 2, canv.height, fillCol="blue"),
         3*canv.width, 
         canv.height*0.7
     ),
     true    //it is fixed
 );
+ctx.closePath();
 
 let shapeBeingMade = null;
 
@@ -100,7 +102,7 @@ function updateAndDraw() {
         if (shapeSelected == 'c') {
             shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0);
         } else if (shapeSelected == 'r') {
-            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2);
+            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2,);
         }
         
     }

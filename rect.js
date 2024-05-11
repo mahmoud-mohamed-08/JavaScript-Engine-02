@@ -2,7 +2,7 @@ import {Vec} from './vector.js';
 import {Aabb} from './aabb.js';
 
 export class Rect {
-	constructor(pos, w, h) {
+	constructor(pos, w, h, c) {
 		this.position = pos;
 		this.width = w;
 		this.height = h;
@@ -11,6 +11,8 @@ export class Rect {
 
         this.vertices = [new Vec(0,0),new Vec(0,0),new Vec(0,0),new Vec(0,0)];
         this.aabb = new Aabb(new Vec(0,0),new Vec(0,0));
+
+        this.fillCol=c;
 	}
 
     //0 1
@@ -57,6 +59,8 @@ export class Rect {
         const inertia = 1/12 * mass * (this.width * this.width + this.height * this.height);  //formula: I = (1/12) * m * (h^2 + w^2)
         return inertia;
     }
+
+
 
 	draw(ctx, fillColor, strokeColor) {
         ctx.save();

@@ -34,7 +34,8 @@ addObject(
     new Rect (
         new Vec (canv.width / 2, canv.height, fillCol="blue"),
         3*canv.width, 
-        canv.height*0.7
+        canv.height*0.7,
+        //add color here
     ),
     true    //it is fixed
 );

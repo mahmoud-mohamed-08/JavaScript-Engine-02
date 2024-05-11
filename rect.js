@@ -66,7 +66,8 @@ export class Rect {
         ctx.save();
         ctx.translate(this.position.x, this.position.y);
         ctx.rotate(this.orientation);
-        if (fillColor) {
+        if (fillColor) {    //remove
+            //instead of fillColor, use this.fillCol for fillStyle
             ctx.fillStyle = fillColor;
             ctx.fillRect(
                 - this.width/2,

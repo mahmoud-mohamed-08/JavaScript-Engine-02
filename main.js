@@ -32,9 +32,10 @@ const objects = [];
 ctx.beginPath();
 addObject(
     new Rect (
-        new Vec (canv.width / 2, canv.height, fillCol="blue"),
+        new Vec (canv.width / 2, canv.height),
         3*canv.width, 
         canv.height*0.7,
+        fillCol="blue"
         //add color here
     ),
     true    //it is fixed

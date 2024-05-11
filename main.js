@@ -14,8 +14,10 @@ const canv = document.getElementById("canvas");
 const ctx = canv.getContext("2d");
 
 export const renderer = new Renderer(canv, ctx);
-let fillCol = "darkGray";
-let bordCol = "black";
+let colorSelected;
+let typeSelected;
+let fillCol = "black";
+let bordCol = "darkGray";
 
 const col = new Collisions();
 
@@ -26,16 +28,18 @@ inp.addListeners();
 
 const objects = [];
 //ground object
+ctx.beginPath();
 addObject(
     new Rect (
         new Vec (canv.width / 2, canv.height),
         3*canv.width, 
         canv.height*0.7,
-        "red"  //wrong! dont assign the value blue to fillCol, just pass the value "blue" as an argument
+        "darkCyan"  //wrong! dont assign the value blue to fillCol, just pass the value "blue" as an argument
         //add color here
     ),
     true    //it is fixed
 );
+ctx.closePath();
 
 let shapeBeingMade = null;
 
@@ -97,7 +101,7 @@ function updateAndDraw() {
         if (shapeSelected == 'c') {
             shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0, colorSelected);
         } else if (shapeSelected == 'r') {
-            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2, colorSelected);
+            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2, fillCol);
         }
         
     }

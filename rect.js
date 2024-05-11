@@ -12,7 +12,7 @@ export class Rect {
         this.vertices = [new Vec(0,0),new Vec(0,0),new Vec(0,0),new Vec(0,0)];
         this.aabb = new Aabb(new Vec(0,0),new Vec(0,0));
 
-        this.fillcol=c;
+        this.fillCol=c;
 	}
 
     //0 1
@@ -64,7 +64,7 @@ export class Rect {
         ctx.save();
         ctx.translate(this.position.x, this.position.y);
         ctx.rotate(this.orientation);
-        if (fillCol) {
+        if (this.fillCol) {
             ctx.fillStyle = this.fillCol;
             ctx.fillRect(
                 - this.width/2,

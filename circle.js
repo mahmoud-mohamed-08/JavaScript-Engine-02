@@ -2,11 +2,13 @@ import {Vec} from './vector.js';
 import {Aabb} from './aabb.js';
 
 export class Circle {
-	constructor(pos, r) {
+	constructor(pos, r, c2) {
 		this.position = pos
 		this.radius = r;
         this.orientation = 0;
         this.aabb = new Aabb(new Vec(0,0),new Vec(0,0));
+
+        this.fillColor=c2;
 	}
     
     updateAabb() {
@@ -24,7 +26,7 @@ export class Circle {
         return inertia;
     }
 
-	draw(ctx, strokeColor, fillColor) {
+	draw(ctx, fillColor, strokeColor) {
         ctx.beginPath();
         ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2, true);
         ctx.closePath();

@@ -14,8 +14,8 @@ const canv = document.getElementById("canvas");
 const ctx = canv.getContext("2d");
 
 export const renderer = new Renderer(canv, ctx);
-const fillCol = "darkGray";
-const bordCol = "black";
+let fillCol = "darkGray";
+let bordCol = "black";
 
 const col = new Collisions();
 
@@ -30,7 +30,9 @@ addObject(
     new Rect (
         new Vec (canv.width / 2, canv.height),
         3*canv.width, 
-        canv.height*0.7
+        canv.height*0.7,
+        "red"  //wrong! dont assign the value blue to fillCol, just pass the value "blue" as an argument
+        //add color here
     ),
     true    //it is fixed
 );
@@ -60,17 +62,42 @@ const selectCollisions = document.getElementById("collisions");
 selectCollisions.addEventListener("change", function () {
     colMode = selectCollisions.value;
 });
+const selectColor = document.getElementById("colorFill");
+selectColor.addEventListener("change", function () {
+    colorSelected = selectColor.value;
+});
+const selectType = document.getElementById("colorBord");
+selectType.addEventListener("change", function () {
+    typeSelected = selectType.value;
+});
 
 //MAIN LOOP
 function updateAndDraw() {
+
+    switch (true) {
+        case colorSelected == 0: fillCol = "red"; break;
+        case colorSelected == 1: fillCol = "green"; break;
+        case colorSelected == 2: fillCol = "blue"; break;
+        case colorSelected == 3: fillCol = "yellow"; break;
+    }
+    console.log(colorSelected);
+
+    switch (true) {
+        case typeSelected == 0: bordCol = "red"; break;
+        case typeSelected == 1: bordCol = "green"; break;
+        case typeSelected == 2: bordCol = "blue"; break;
+        case typeSelected == 3: bordCol = "yellow"; break;
+    }
+    //console.log(fillCol);
+
 
     //make objects
     if (inp.inputs.lclick && shapeBeingMade == null) {
         //lesson 03 - make rectangles with mouse
         if (shapeSelected == 'c') {
-            shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0);
+            shapeBeingMade = new Circle(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS, 0, colorSelected);
         } else if (shapeSelected == 'r') {
-            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2);
+            shapeBeingMade = new Rect(inp.inputs.mouse.position.clone(), SMALLEST_RADIUS*2, SMALLEST_RADIUS*2, colorSelected);
         }
         
     }
